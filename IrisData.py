@@ -3,7 +3,53 @@
 # Description : Analyse the Iris Data Set.
 #References : https://stackoverflow.com/questions/1025379/decimal-alignment-formatting-in-python
 #			  https://stackoverflow.com/questions/275018/how-can-i-remove-chomp-a-trailing-newline-in-python
+#			  https://stackoverflow.com/questions/15109165/loading-a-dataset-from-file-to-use-with-sklearn
+#			  https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
+#			  http://www.learn4master.com/machine-learning/visualize-iris-dataset-using-python
+#			  https://stackoverflow.com/questions/11106823/adding-two-pandas-dataframes
+#			  http://scikit-learn.org/stable/modules/neighbors.html
 #
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.cm as cm
+import matplotlib.colors as colors
+
+def VisualRepresentation():
+	#plt.show()
+	irisData = pd.read_csv('Data\IrisDataWithHeaders.csv')
+	print(irisData.describe())
+	#irisData.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+	#pd.Dataframe(irisData)
+	
+	print ("1. Press 1 for the Sepal Analysis Scatter plot")
+	print ("2. Press 2 to See the Petal Analysis plot")
+	print ("3. Press 3 for the Dataset analysis")
+	print ("4. Press 4 to return to main menu")
+	#axes = plt.subplots()
+	subMenu = int(input("Please choose from the options above:"))
+	if subMenu == 1:
+		ax = irisData[irisData.Species=='Iris-setosa'].plot.scatter(x='SepalLength', y='SepalWidth', color='green', label='setosa')
+		irisData[irisData.Species=='Iris-versicolor'].plot.scatter(x='SepalLength', y='SepalWidth', color='blue', label='versicolor', ax=ax)
+		irisData[irisData.Species=='Iris-virginica'].plot.scatter(x='SepalLength', y='SepalWidth', color='red', label='virginica', ax=ax)
+		ax.set_title("scatter")
+	elif subMenu == 2:
+		ax = irisData[irisData.Species=='Iris-setosa'].plot.scatter(x='PetalLength', y='PetalWidth', color='green', label='setosa')
+		irisData[irisData.Species=='Iris-versicolor'].plot.scatter(x='PetalLength', y='PetalWidth', color='blue', label='versicolor', ax=ax)
+		irisData[irisData.Species=='Iris-virginica'].plot.scatter(x='PetalLength', y='PetalWidth', color='red', label='virginica', ax=ax)
+		ax.set_title("scatter")
+	elif subMenu == 3:
+		pd.plotting.scatter_matrix(irisData)
+		plt.show()
+	elif subMenu < 1 or subMenu > 3:
+		return
+	#ax.plot()
+	#pd.plotting.scatter_matrix(irisData)
+	
+	#irisData.hist()
+	#axes.legend()
+	
+
+
 def DisplayDataSet():
 	with open('Data\IrisData.csv') as input:
 			#iterate through each line in the file
@@ -285,14 +331,16 @@ def DisplayOptions():
 	print ("2. Press 2 to See the Sepal Analysis")
 	print ("3. Press 3 to see the Petal Analysis")
 	print ("4. Press 4 to Analyse by species")
-	print ("5. Press 5 to exit the application")
+	print ("5. Press 5 for the map view of Iris Data Set")
+	print ("6. Press 6 for predicting the species by Sepal Length, Sepal Width, Petal Length and Petal Width")
+	print ("7. Press 7 to exit the application")
 	#print "Please choose from an option above:"
 	#print "Please choose from an option above:"
 DisplayOptions()
-# userInput = int(input("Please choose from the options above:"))
-userInput = 4
-while userInput != 5:
-	if userInput > 0 and userInput <= 4:
+userInput = int(input("Please choose from the options above:"))
+userInput = 5
+while userInput != 7:
+	if userInput > 0 and userInput <= 7:
 		if userInput == 1:
 			DisplayDataSet()
 		elif userInput == 2:
@@ -301,6 +349,12 @@ while userInput != 5:
     			PetalAnalysis()
 		elif userInput == 4:
     			SpeciesAnalysis()
+		elif userInput == 5:
+				VisualRepresentation()
+		
+	else:
+		print("Invalid option!!..")
+		#DisplayOptions()
 	
 	# elif userInput == 3:
     # 	print("PL")
