@@ -340,26 +340,29 @@ def DisplayOptions():
 	print ("7. Press 7 to exit the application")
 	#print "Please choose from an option above:"
 	#print "Please choose from an option above:"
-DisplayOptions()
-userInput = int(input("Please choose from the options above:"))
-#userInput = 5
-while userInput != 7:
-	if userInput > 0 and userInput <= 7:
-		if userInput == 1:
-			DisplayDataSet()
-		elif userInput == 2:
-			SepalAnalysis()
-		elif userInput == 3:
-    			PetalAnalysis()
-		elif userInput == 4:
-    			SpeciesAnalysis()
-		elif userInput == 5:
-				VisualRepresentation()				
-		elif userInput == 6:
-				PredictSpecies()
-		
-	else:
-		print("Invalid option!!..")
-		
+try:
 	DisplayOptions()
 	userInput = int(input("Please choose from the options above:"))
+	#userInput = 5
+	while userInput != 7:
+		if userInput > 0 and userInput <= 7:
+			if userInput == 1:
+				DisplayDataSet()
+			elif userInput == 2:
+				SepalAnalysis()
+			elif userInput == 3:
+					PetalAnalysis()
+			elif userInput == 4:
+					SpeciesAnalysis()
+			elif userInput == 5:
+					VisualRepresentation()				
+			elif userInput == 6:
+					PredictSpecies()
+			
+		else:
+			print("Invalid option!!..")
+			
+		DisplayOptions()
+		userInput = int(input("Please choose from the options above:"))
+except (RuntimeError, TypeError, NameError, ValueError,EnvironmentError,EOFError, ArithmeticError):
+	print("Some error has occured. Please contact system administrator!..")
