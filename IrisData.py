@@ -17,9 +17,10 @@ import matplotlib.colors as colors
 def VisualRepresentation():
 	#plt.show()
 	irisData = pd.read_csv('Data\IrisDataWithHeaders.csv')
-	print(irisData.describe())
-	#irisData.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
-	#pd.Dataframe(irisData)
+	print(irisData.describe())		
+
+	#pd.plotting.scatter_matrix(irisData)
+	#plt.show()
 	
 	print ("1. Press 1 for the Sepal Analysis Scatter plot")
 	print ("2. Press 2 to See the Petal Analysis plot")
@@ -31,12 +32,12 @@ def VisualRepresentation():
 		ax = irisData[irisData.Species=='Iris-setosa'].plot.scatter(x='SepalLength', y='SepalWidth', color='green', label='setosa')
 		irisData[irisData.Species=='Iris-versicolor'].plot.scatter(x='SepalLength', y='SepalWidth', color='blue', label='versicolor', ax=ax)
 		irisData[irisData.Species=='Iris-virginica'].plot.scatter(x='SepalLength', y='SepalWidth', color='red', label='virginica', ax=ax)
-		ax.set_title("scatter")
+		ax.set_title("Sepal Analysis")
 	elif subMenu == 2:
 		ax = irisData[irisData.Species=='Iris-setosa'].plot.scatter(x='PetalLength', y='PetalWidth', color='green', label='setosa')
 		irisData[irisData.Species=='Iris-versicolor'].plot.scatter(x='PetalLength', y='PetalWidth', color='blue', label='versicolor', ax=ax)
 		irisData[irisData.Species=='Iris-virginica'].plot.scatter(x='PetalLength', y='PetalWidth', color='red', label='virginica', ax=ax)
-		ax.set_title("scatter")
+		ax.set_title("Petal Analysis")
 	elif subMenu == 3:
 		pd.plotting.scatter_matrix(irisData)
 		plt.show()
@@ -326,6 +327,9 @@ def PetalAnalysis():
 		print("The Arithmetic Mean of Petal Length for all flowers from Iris Data Set is {}: ".format(totalPetalLength/totalCount))
 		print("The Arithmetic Mean of Petal Width for all flowers from Iris Data Set is {}: ".format(totalPetalWidth/totalCount))
 
+def PredictSpecies():
+	print("Sorry.. This module is not ready yet!.")
+
 def DisplayOptions():
 	print ("1. Press 1 to View the DataSet")
 	print ("2. Press 2 to See the Sepal Analysis")
@@ -338,7 +342,7 @@ def DisplayOptions():
 	#print "Please choose from an option above:"
 DisplayOptions()
 userInput = int(input("Please choose from the options above:"))
-userInput = 5
+#userInput = 5
 while userInput != 7:
 	if userInput > 0 and userInput <= 7:
 		if userInput == 1:
@@ -350,17 +354,12 @@ while userInput != 7:
 		elif userInput == 4:
     			SpeciesAnalysis()
 		elif userInput == 5:
-				VisualRepresentation()
+				VisualRepresentation()				
+		elif userInput == 6:
+				PredictSpecies()
 		
 	else:
 		print("Invalid option!!..")
-		#DisplayOptions()
-	
-	# elif userInput == 3:
-    # 	print("PL")
-	# elif userInput == 4:
-    # 	print("Mapping")
-	# elif userInput == 5:
-    # 	print("Exit")
+		
 	DisplayOptions()
 	userInput = int(input("Please choose from the options above:"))
